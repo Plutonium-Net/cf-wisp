@@ -24,3 +24,12 @@ opt-level = "s" # optimize for size in release builds
 lto = true
 strip = true
 codegen-units = 1
+
+# The wasm-opt bundled with worker-build 0.1.x predates bulk-memory being a
+# default target feature of rustc's wasm32-unknown-unknown, so it rejects the
+# module unless the flag is passed explicitly.
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-O", "--enable-bulk-memory"]
+
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = ["-O", "--enable-bulk-memory"]
