@@ -89,6 +89,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "cfwisp"
+version = "0.1.0"
+dependencies = [
+ "bytes",
+ "event-listener",
+ "flume",
+ "futures-util",
+ "regex",
+ "send_wrapper",
+ "thiserror 2.0.12",
+ "tokio",
+ "tokio-util",
+ "wisp-mux",
+ "worker",
+]
+
+[[package]]
 name = "chrono"
 version = "0.4.41"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1160,23 +1177,6 @@ dependencies = [
  "rustc-hash",
  "slab",
  "thiserror 2.0.12",
-]
-
-[[package]]
-name = "wisp-server-workers"
-version = "0.1.0"
-dependencies = [
- "bytes",
- "event-listener",
- "flume",
- "futures-util",
- "regex",
- "send_wrapper",
- "thiserror 2.0.12",
- "tokio",
- "tokio-util",
- "wisp-mux",
- "worker",
 ]
 
 [[package]]

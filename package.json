@@ -1,5 +1,5 @@
 {
-	"name": "wisp-server-workers",
+	"name": "cfwisp",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {

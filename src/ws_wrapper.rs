@@ -84,7 +84,10 @@ impl WebSocketReader {
 }
 
 impl WebSocketWrapper {
-	pub fn connect(ws: WebSocket) -> (Self, WebSocketReader) {
+	/// `on_close` runs when the underlying WebSocket reports closure. The mux
+	/// loop parks forever after a close, so this is the only reliable place to
+	/// observe that a session ended.
+	pub fn connect(ws: WebSocket, on_close: impl Fn() + 'static) -> (Self, WebSocketReader) {
 		let (read_tx, read_rx) = flume::unbounded();
 		let closed = Arc::new(AtomicBool::new(false));
 
@@ -103,6 +106,7 @@ impl WebSocketWrapper {
 		let onclose = Closure::wrap(Box::new(move || {
 			onclose_closed.store(true, Ordering::Release);
 			onclose_event.notify(usize::MAX);
+			on_close();
 		}) as Box<dyn Fn()>);
 
 		ws.set_binary_type(BinaryType::Arraybuffer);
